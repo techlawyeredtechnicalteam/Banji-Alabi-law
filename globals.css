@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0e1a2b;
+  --color-navy: #17283f;
+  --color-navy-soft: #243a58;
+  --color-brass: #b98a3e;
+  --color-brass-light: #dab877;
+  --color-brass-deep: #7d5a1c;
+  --color-limestone: #ece6db;
+  --color-paper: #faf8f4;
+  --color-muted: #5b6575;
+
+  --font-display: "Newsreader Variable", "Georgia", serif;
+  --font-sans: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: var(--color-brass-light);
+    color: var(--color-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .wrap { padding-inline: 2.5rem; }
+  }
+  .prose-legal p {
+    max-width: 66ch;
+    margin-bottom: 1.15em;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.005em;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .btn-brass {
+    background: var(--color-brass);
+    color: var(--color-ink);
+  }
+  .btn-brass:hover { background: var(--color-brass-light); }
+  .btn-outline-light {
+    border-color: rgb(250 248 244 / 0.45);
+    color: var(--color-paper);
+  }
+  .btn-outline-light:hover { border-color: var(--color-brass-light); color: var(--color-brass-light); }
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-ink:hover { background: var(--color-navy-soft); }
+  .btn-outline-ink {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-outline-ink:hover { background: var(--color-ink); color: var(--color-paper); }
+
+  .field {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #cfc8bb;
+    border-radius: 2px;
+    padding: 0.8rem 0.95rem;
+    font: inherit;
+    color: var(--color-ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-brass-deep);
+    box-shadow: 0 0 0 3px rgb(185 138 62 / 0.25);
+  }
+  .field[aria-invalid="true"] { border-color: #a3281f; }
+
+  /* Survey plan drawing: the one animated moment on the site */
+  .survey-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: survey-draw 2.6s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+  }
+  .survey-line.d1 { animation-delay: 0.15s; }
+  .survey-line.d2 { animation-delay: 0.55s; }
+  .survey-line.d3 { animation-delay: 0.95s; }
+  .survey-beacon {
+    opacity: 0;
+    animation: survey-fade 0.6s ease-out forwards;
+  }
+  @keyframes survey-draw { to { stroke-dashoffset: 0; } }
+  @keyframes survey-fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .survey-line { animation: none; stroke-dashoffset: 0; }
+    .survey-beacon { animation: none; opacity: 1; }
+  }
+}
