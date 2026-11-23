@@ -1,0 +1,15 @@
+{
+  "name": "banji-alabi-law",
+  "version": "1.0.0",
+  "description": "Next.js (App Router, TypeScript, Tailwind CSS v4), deployed to Cloudflare Workers with OpenNext.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "wrangler": "^4.166.0"
+  }
+}
